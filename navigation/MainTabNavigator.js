@@ -70,7 +70,7 @@ SettingsStack.path = '';
 
 const ChatRoomStack = createStackNavigator(
   {
-    Home: ChatRoomScreen,
+    ChatRoom: ChatRoomScreen,
   },
   config
 );
