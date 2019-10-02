@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import ChatRoomScreen from "../screens/ChatRoomScreen";
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -67,10 +68,27 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+const ChatRoomStack = createStackNavigator(
+  {
+    Home: ChatRoomScreen,
+  },
+  config
+);
+
+ChatRoomStack.navigationOptions = {
+  tabBarLabel: 'Chatroom',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-' : 'md-options'} />
+  ),
+};
+
+ChatRoomStack.path = '';
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+  ChatRoomStack
 });
 
 tabNavigator.path = '';
