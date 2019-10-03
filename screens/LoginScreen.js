@@ -12,7 +12,7 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
-export default function ChatRoomScreen() {
+export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -20,7 +20,7 @@ export default function ChatRoomScreen() {
         contentContainerStyle={styles.contentContainer}>
 
         <Text>
-          Chatroom
+          Login
         </Text>
       </ScrollView>
 
@@ -33,7 +33,7 @@ export default function ChatRoomScreen() {
   );
 }
 
-ChatRoomScreen.navigationOptions = {
+LoginScreen.navigationOptions = {
   header: null,
 };
 
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 50,
   },
-  ChatRoomScreenFilename: {
+  LoginScreenFilename: {
     marginVertical: 7,
   },
   codeHighlightText: {

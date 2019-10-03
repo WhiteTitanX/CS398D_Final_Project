@@ -7,6 +7,10 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ChatRoomScreen from "../screens/ChatRoomScreen";
+import ChatroomListScreen from "../screens/ChatroomListScreen";
+import ContactsScreen from "../screens/ContactsScreen";
+import LoginScreen from "../screens/LoginScreen";
+import SignUpScreen from "../screens/SignUpScreen";
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -84,11 +88,81 @@ ChatRoomStack.navigationOptions = {
 
 ChatRoomStack.path = '';
 
+//Chatroom List Nav
+const ChatroomListStack = createStackNavigator(
+  {
+    ChatroomList: ChatroomListScreen,
+  },
+  config
+);
+
+ChatroomListStack.navigationOptions = {
+  tabBarLabel: 'ChatroomList',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-' : 'md-options'} />
+  ),
+};
+
+ChatroomListStack.path = '';
+
+//Contacts Nav
+const ContactsStack = createStackNavigator(
+  {
+    Contacts: ContactsScreen,
+  },
+  config
+);
+
+ContactsStack.navigationOptions = {
+  tabBarLabel: 'Contacts',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-' : 'md-options'} />
+  ),
+};
+
+ContactsStack.path = '';
+
+//Login Nav
+const LoginStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+  },
+  config
+);
+
+LoginStack.navigationOptions = {
+  tabBarLabel: 'Login',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-' : 'md-options'} />
+  ),
+};
+
+LoginStack.path = '';
+
+//Sign Up Nav
+const SignUpStack = createStackNavigator(
+  {
+    SignUp: SignUpScreen,
+  },
+  config
+);
+
+SignUpStack.navigationOptions = {
+  tabBarLabel: 'Sign Up',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-' : 'md-options'} />
+  ),
+};
+
+SignUpStack.path = '';
+
+
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-  ChatRoomStack
+  LoginStack,
+  SignUpStack,
+  ChatroomListStack,
+  ChatRoomStack,
+  ContactsStack,
 });
 
 tabNavigator.path = '';
