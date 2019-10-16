@@ -6,8 +6,8 @@
     - Contacts - Marta
 
 
-##Build Notes:
-###React Native Elements
+## Build Notes:
+### React Native Elements - Pre-built elements
 1. npm i react-native-vector-icons --save
 2. react-native link react-native-vector-icons
 3. npm i react-native-elements --save
