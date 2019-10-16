@@ -4,6 +4,9 @@
     - Chatroom List - Alex
         - Actual Chat - Billy
     - Contacts - Marta
+    
+## Start Project Debug
+npm run web
 
 
 ## Build Notes:
