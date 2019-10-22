@@ -8,27 +8,164 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
+
 export default function ContactsScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
 
-        <Text>
-          Contacts
-        </Text>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          Footer Bar
-        </Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.contactText}>Contacts</Text>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Add conctact') 
+          }} >
+          <View>
+            <Text style={styles.contactText}>
+              Add+
+            </Text>
+        </View>
+        </TouchableHighlight>
       </View>
+
+      <View style={styles.userContainer}>
+        <TouchableHighlight style={styles.userDetailsButton}
+          onPress={() => { 
+                        alert('User Information') 
+                    }} >
+          <View style={styles.user}>
+            <Image
+              source={{ uri:'https://cdn.esquimaltmfrc.com/wp-content/uploads/2015/09/flat-faces-icons-circle-man-9-720x720.png'}}
+              style={styles.avatarStyle}
+            />
+            <Text style={styles.userName}>
+              Jack Black
+            </Text>
+          </View>
+        </TouchableHighlight>
+      </View>
+      
+      <ScrollView>
+      <View style={styles.contactsContainer}>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Amanda Smith
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Jared Leto
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Hailey Brown
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Joshua Davis
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Martha Jones
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Ezra Miller
+            </Text>
+          </View>
+        </TouchableHighlight>
+         <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Jack Pearson
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Garry Hamilton
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Leah Wilson
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Felix King
+            </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight 
+          onPress={() => { 
+            alert('Text the contact') 
+          }} >
+          <View style={styles.contactContainer}>
+            <Text style={styles.contactName}>
+              Jakub Lewandowski
+            </Text>
+          </View>
+        </TouchableHighlight>
+      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -39,7 +176,8 @@ ContactsScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: deviceWidth,
+    height: deviceHeight,
     backgroundColor: '#fff',
   },
   developmentModeText: {
@@ -124,4 +262,50 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: deviceHeight / 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#d9d9d9',
+    paddingTop: 30,
+    alignItems: 'flex-end',
+  },
+  contactText: {
+    fontSize: deviceHeight / 20,
+    fontWeight: 'bold',
+    color: 'rgba(96,100,109, 1)',
+    paddingBottom: 15,
+  },
+  avatarStyle: {
+    width: deviceHeight / 10,
+    height: deviceHeight / 10,
+    borderRadius: 15,
+    marginLeft: 10,
+  },
+  userName: {
+    fontSize: deviceHeight/25,
+    color: 'black',
+    marginLeft: 20,
+  },
+  user: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#d9d9d9',
+    height: deviceHeight/8,
+  },
+  contactContainer: {
+    height: deviceHeight/15,
+    width: deviceWidth,
+    borderBottomWidth: 1,
+    borderBottomColor: '#d9d9d9',
+    justifyContent: 'center',
+  },
+  contactName: {
+    fontSize: deviceHeight/30,
+    paddingLeft: 20,
+    color: 'rgba(96,100,109, 1)',
+  }
+
 });
