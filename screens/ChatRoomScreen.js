@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Platform,
@@ -15,11 +15,21 @@ import Colors from "../constants/Colors";
 import {Ionicons} from "@expo/vector-icons";
 
 export default function ChatRoomScreen() {
+
+  const [name,setName] = useState("");
+  const [currentMessage,setCurrentMessage] = useState("");
+
+  setInterval(()=>{
+    if(global.name!==name){
+      setName(global.name);
+    }
+  },100);
+
   return (
     <View style={styles.container}>
       <View style={[styles.headerContainer,styles.headerStyle]}>
         <Text style={styles.headerText}>
-          Chat With Chad
+          Chat With {name}
         </Text>
       </View>
       <ScrollView
@@ -67,14 +77,17 @@ export default function ChatRoomScreen() {
             style={styles.viewTextInput}
             placeholder="Type your message..."
             onChangeText={value => {
-              //Do work here to send message.
+              setCurrentMessage(value);
             }}
-            //value={this.state.currentMessage}
+            value={currentMessage}
           />
 
           {/* Button send message */}
           <TouchableOpacity
-            //onPress={this.sendMessage}
+            onPress={()=>{
+              global.name=currentMessage;
+              setCurrentMessage("");
+            }}
           >
             <Ionicons name="md-send" size={32} color="#488aff" />
           </TouchableOpacity>

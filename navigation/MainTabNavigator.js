@@ -131,7 +131,7 @@ const LoginStack = createStackNavigator(
 );
 
 LoginStack.navigationOptions = {
-  tabBarLabel: 'Login',
+  tabBarLabel: 'Sign In',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-' : 'md-options'} />
   ),
@@ -159,7 +159,7 @@ SignUpStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   LoginStack,
-  SignUpStack,
+  //SignUpStack,
   ChatroomListStack,
   ChatRoomStack,
   ContactsStack,
