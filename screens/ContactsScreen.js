@@ -22,14 +22,16 @@ export default function ContactsScreen() {
     <View style={styles.container}>
 
       <View style={styles.titleContainer}>
+      <View style={styles.contactsTitile}>
         <Text style={styles.contactText}>Contacts</Text>
+      </View>
         <TouchableHighlight 
           onPress={() => { 
             alert('Add conctact') 
           }} >
-          <View>
+          <View style={styles.add}>
             <Text style={styles.contactText}>
-              Add+
+              +
             </Text>
         </View>
         </TouchableHighlight>
@@ -265,7 +267,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: deviceHeight / 10,
+    height: deviceHeight / 9,
     borderBottomWidth: 1,
     borderBottomColor: '#d9d9d9',
     paddingTop: 30,
@@ -275,16 +277,15 @@ const styles = StyleSheet.create({
     fontSize: deviceHeight / 20,
     fontWeight: 'bold',
     color: 'rgba(96,100,109, 1)',
-    paddingBottom: 15,
   },
   avatarStyle: {
-    width: deviceHeight / 10,
-    height: deviceHeight / 10,
+    width: deviceHeight / 15,
+    height: deviceHeight / 15,
     borderRadius: 15,
     marginLeft: 10,
   },
   userName: {
-    fontSize: deviceHeight/25,
+    fontSize: deviceHeight/30,
     color: 'black',
     marginLeft: 20,
   },
@@ -293,19 +294,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#d9d9d9',
-    height: deviceHeight/8,
+    height: deviceHeight/10,
   },
   contactContainer: {
-    height: deviceHeight/15,
+    height: deviceHeight/20,
     width: deviceWidth,
     borderBottomWidth: 1,
     borderBottomColor: '#d9d9d9',
     justifyContent: 'center',
   },
   contactName: {
-    fontSize: deviceHeight/30,
+    fontSize: deviceHeight/35,
     paddingLeft: 20,
     color: 'rgba(96,100,109, 1)',
+  },
+  contactsTitile: {
+    marginLeft: 10,
+    paddingBottom: 10,
+  },
+  add: {
+    marginRight: 10,
+    paddingBottom: 10,
   }
 
 });
