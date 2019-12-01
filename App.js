@@ -7,6 +7,20 @@ import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
 
+import * as firebase from 'firebase';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDGfkt8lepEHsIRgJUqC4dMjGtDHFAPwGg",
+  authDomain: "chatapp-b83db.firebaseapp.com",
+  databaseURL: "https://chatapp-b83db.firebaseio.com",
+  projectId: "chatapp-b83db",
+  storageBucket: "chatapp-b83db.appspot.com",
+  messagingSenderId: "826894141261",
+  appId: "1:826894141261:web:8723b45db8e735ad131904"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
