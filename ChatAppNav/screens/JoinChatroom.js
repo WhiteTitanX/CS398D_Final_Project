@@ -20,7 +20,9 @@ export default class JoinChatroomScreen extends React.Component {
                     />
                     <View style={styles.row}>
                         <TouchableHighlight
-                            onPress={()=>{alert("Join");}}
+                            onPress={()=>{
+                                console.log("Join chatroom: " + this.state.chatroomName);
+                            }}
                         >
                             <View style={styles.button}><Text style={styles.buttonText}>Join</Text></View>
                         </TouchableHighlight>

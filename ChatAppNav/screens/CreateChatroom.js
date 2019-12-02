@@ -3,7 +3,9 @@ import {Text, TouchableHighlight, View, TextInput, ImageBackground} from "react-
 
 export default class CreateChatroomScreen extends React.Component {
     state = {
-        chatroomName: ''
+        chatroomName: '',
+        users: '',
+        usersArray: []
     };
 
     render() {
@@ -18,9 +20,17 @@ export default class CreateChatroomScreen extends React.Component {
                                onChangeText={(chatroomName) => this.setState({chatroomName})}
                                placeholder='Chatroom Name'
                     />
+                    <TextInput style={styles.loginInput}
+                               onChangeText={(users) => this.setState({users})}
+                               placeholder='Name1, Name2, Name3...'
+                    />
                     <View style={styles.row}>
                         <TouchableHighlight
-                            onPress={()=>{alert("Create");}}
+                            onPress={()=>{
+                                this.state.usersArray = this.state.users.split(',');
+                                console.log("Creating chatroom: " + this.state.chatroomName);
+                                console.log("These are the people in this chatroom: " + this.state.usersArray);
+                            }}
                         >
                             <View style={styles.button}><Text style={styles.buttonText}>Create</Text></View>
                         </TouchableHighlight>
