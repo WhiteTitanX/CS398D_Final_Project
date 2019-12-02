@@ -2,7 +2,6 @@ import * as React from "react";
 import {Image, ImageBackground, Text, TextInput, TouchableHighlight, View} from "react-native";
 
 export default class LoginScreen extends React.Component {
-
     state = {
         username: '',
         password: ''
@@ -15,7 +14,6 @@ export default class LoginScreen extends React.Component {
             }
         });
         return (
-
             <View style={styles.container}>
                 <ImageBackground
                     style={styles.imageBackground}

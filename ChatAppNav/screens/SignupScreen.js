@@ -4,7 +4,6 @@ import {Image, ImageBackground, Text, TextInput, TouchableHighlight, View} from 
 export default class SignupScreen extends React.Component {
     static navigationOptions = {
         title: 'Sign Up',
-        /* No more header config here! */
     };
 
     state = {
