@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, StyleSheet, Image, TextInput, TouchableHighlight, ImageBackground, Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import * as firebase from 'firebase';
+
+let deviceHeight = Dimensions.get('window').height;
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGfkt8lepEHsIRgJUqC4dMjGtDHFAPwGg",
@@ -14,78 +16,54 @@ const firebaseConfig = {
   messagingSenderId: "826894141261",
   appId: "1:826894141261:web:8723b45db8e735ad131904"
 };
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 
-let user = {
-  username:'billy',
-  password:'1234565478945',
-  email:'billygerhard@gmail.com',
-};
+class LoginScreen extends React.Component {
+	state = {
+		username: '',
+		password: ''
+	};
 
-let userSave = {
-  displayName: 'Billy',
-  email: 'billygerhard@gmail.com',
-};
-firebase.auth().onAuthStateChanged(user=>{
-  if(user){
-    console.log('User logged in');
-    console.log(user);
-    firebase.database().ref(`/users/${user.uid}`).set(userSave);
-  }
-  else{
-    console.log('user logged out');
-  }
-});
-
-let chatroom = {
-  name:'CS398D',
-  description:'Classroom Chat'
-};
-firebase.database().ref(`/chatrooms/${chatroom.name}`).set(chatroom);
-firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-  .then(res=>{
-    console.log(res);
-  })
-  .catch((error) => {
-  // Handle Errors here.
-  console.log(error);
-  // ...
-});
-
-firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-  .then(res=>{
-    console.log(res);
-  })
-  .catch((error)=>{
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
-});
-
-let ref = firebase.database().ref(`/messages/`);//.child(`chatID`).equalTo(chatroom.name);
-
-ref.on('child_added',(data)=>{
-  console.log('key',data.key);
-  console.log('value',data.val());
-});
-
-class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
+	<ImageBackground
+		style={{flex:1,resizeMode: 'cover',height:Dimensions.get('window').height}}
+		source={require('./res/login_background.jpg')}
+	>
+      <View style={styles.container}>
+		<Image
+			style={{width: 128, height: 128}}
+			source={require('./res/speech-bubble.png')}
+		/>
+		<Text style={styles.title}>Chat App</Text>
+		<TextInput style={styles.loginInput}
+            onChangeText={(username) => this.setState({username})}
+            placeholder='Username'
         />
-      </View>
+		<TextInput style={styles.loginInput}
+            onChangeText={(password) => this.setState({password})}
+            placeholder='Password'
+        />
+		<View style={styles.row}>
+			<TouchableHighlight
+			onPress={()=>{alert("Open group chat window");}}
+			>
+			<View style={styles.button}><Text style={styles.buttonText}>Login</Text></View>
+		</TouchableHighlight>
+			<TouchableHighlight
+			onPress={()=>{this.props.navigation.navigate('Signup')}}
+			>
+			<View style={styles.button}><Text style={styles.buttonText}>Signup</Text></View>
+		</TouchableHighlight>
+		</View>
+		</View>
+	</ImageBackground>
     );
   }
 }
 
-class DetailsScreen extends React.Component {
+class SignupScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -97,11 +75,11 @@ class DetailsScreen extends React.Component {
 
 const RootStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    Details: DetailsScreen,
+    Login: LoginScreen,
+    Signup: SignupScreen,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
   }
 );
 
@@ -112,3 +90,42 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 }
+
+const styles = StyleSheet.create({
+	container:{
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	title:{
+		fontSize: 28,
+		marginBottom: 10
+	},
+	loginInput:{
+		borderRadius: 10,
+		borderColor: 'lightgray',
+		borderWidth: 2,
+		backgroundColor: "#ffffff",
+		width: 200,
+		height: 48,
+		padding: 5,
+		marginTop: 10
+	},
+	button:{
+		borderRadius: 10,
+		borderColor: 'lightgray',
+		borderWidth: 2,
+		backgroundColor: "#ffffff",
+		height: 48,
+		width: 80,
+		padding: 5,
+		marginTop: 10,
+		alignItems: 'center',
+		justifyContent: 'center',
+		margin: 5,
+	},
+	row:{
+		flexDirection: 'row',
+		marginTop: 30
+	}
+});
