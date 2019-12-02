@@ -61,7 +61,9 @@ export default class LoginScreen extends React.Component {
     global.firebase.authService.checkAuth()
       .then(()=>{
         this.props.navigation.navigate('App');
-      })
+      }).catch(() => {
+        //not logged in
+    })
   }
 }
 

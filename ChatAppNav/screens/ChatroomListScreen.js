@@ -8,7 +8,7 @@ export default class ChatroomListScreen extends React.Component {
           <TouchableHighlight
             onPress={()=>{alert("hello");}}
           >
-            <View style={{paddingRight: 15,paddingLeft:10, paddingBottom: 5}}><Text style={{fontSize: 24}}>+</Text></View>
+            <View style={{paddingRight: 15,paddingLeft:10, paddingBottom:1}}><Text style={{fontSize: 18}}>Add +</Text></View>
           </TouchableHighlight>
         ),
     };
@@ -18,7 +18,9 @@ export default class ChatroomListScreen extends React.Component {
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text>Chatroom List Screen</Text>
               <TouchableHighlight
-                onPress={()=>{global.firebase.auth.signOut()}}
+                onPress={()=>{global.firebase.auth.signOut().then(() => {
+                    this.props.navigation.navigate('AuthLoading');
+                })}}
               >
                 <View style={styles.button}><Text style={styles.buttonText}>{global.firebase.auth.currentUser.displayName} Sign Out</Text></View>
               </TouchableHighlight>
