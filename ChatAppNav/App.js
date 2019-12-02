@@ -11,6 +11,9 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 
+import * as FirebaseDatabaseHelper from './services/firebase-database';
+import * as FirebaseAuthHelper from './services/firebase-auth';
+
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from "./screens/SignupScreen";
 import ChatroomListScreen from "./screens/ChatroomListScreen";
@@ -33,23 +36,56 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 global.firebase = {
-	authHelper:{},
+	authHelper:FirebaseAuthHelper,
 	auth:firebase.auth(),
-	database:firebase.database()
+	authService:{},
+	database:firebase.database(),
+	databaseHelper:FirebaseDatabaseHelper,
+	databaseService:{}
 };
-global.firebase.authHelper.checkAuth = checkAuth;
-global.firebase.authHelper.logOut = firebase.auth().signOut;
+global.firebase.authService.checkAuth = checkAuth;
+global.firebase.authService.updatePublicProfile = updatePublicProfile;
 
 function checkAuth(){
 	return new Promise((resolve, reject) => {
-		firebase.auth().onAuthStateChanged(user => {
+		let unsubscribe = firebase.auth().onAuthStateChanged(user => {
 			if (user) {
 				//If logged in, navigate to chatroom list screen.
+				console.log(user);
+				unsubscribe();
 				resolve(true);
 			} else {
+				unsubscribe();
 				reject(false);
 			}
 		});
+	});
+}
+
+function updatePublicProfile(uid){
+	if(!uid && global.firebase.auth.currentUser){
+		uid = global.firebase.auth.currentUser.uid;
+	}
+	let path = global.firebase.databaseHelper.getPublicProfilePath(uid);
+	let publicProfile = global.firebase.authHelper.getPublicUserProfile(global.firebase.auth.currentUser);
+	return global.firebase.database.ref(path).set(publicProfile);
+}
+
+function saveObjectSetObjectKey(obj,endpoint){
+	//Remove functions and undefined.
+	obj=JSON.parse(JSON.stringify(obj));
+	return new Promise((resolve) => {
+		obj.lastSaved = new Date().getTime();
+		if(obj.key){
+			this.update(endpoint,obj.key,obj);
+			resolve(obj.key);
+		}
+		else{
+			obj.key=this.push(endpoint,obj);
+			this.saveObjectSetObjectKey(obj,endpoint).then((data)=>{
+				resolve(data);
+			});
+		}
 	});
 }
 

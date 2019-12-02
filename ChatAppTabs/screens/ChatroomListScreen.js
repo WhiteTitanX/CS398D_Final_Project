@@ -13,156 +13,162 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
-export default function ChatroomListScreen() {
-	return (
-		<View style={styles.container}>
-			<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+export default class ChatroomListScreen extends React.Component {
+	render(){
+		setInterval(()=>{
+			this.setState({});
+		},100);
+		return (
+			<View style={styles.container}>
+				<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-				<View style={styles.titleBarContainer}>
-					<View style={styles.titleBarLeft}>
-						<Text style={styles.titleBarText}>
-							Chatroom List
-						</Text>
-					</View>
-					<View style={styles.titleBarRight}>
-						<TouchableHighlight
-							onPress={()=>{alert("Add the group id");}}
-						>
+					<View style={styles.titleBarContainer}>
+						<View style={styles.titleBarLeft}>
 							<Text style={styles.titleBarText}>
-								Add +
+								Chatroom List
 							</Text>
-						</TouchableHighlight>
+						</View>
+						<View style={styles.titleBarRight}>
+							<TouchableHighlight
+								onPress={()=>{alert("Add the group id");}}
+							>
+								<Text style={styles.titleBarText}>
+									Add +
+								</Text>
+							</TouchableHighlight>
+						</View>
 					</View>
-				</View>
 
-				<View>
-					<TouchableHighlight
-						onPress={()=>{alert("Open group chat window");}}
-					>
-						<View style={styles.groupContainer}>
-							<View style={styles.groupLeft}>
-								<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/1150/1150575.svg"}}/>
-							</View>
-							<View style={styles.groupMiddle}>
-								<Text style={styles.groupText}>
-									CIS 120 Chat
-								</Text>
-							</View>
-							<View style={styles.groupRight}>
-								<TouchableHighlight
-									onPress={()=>{alert("Open actions window");}}
-								>
+					<View>
+						<TouchableHighlight
+							onPress={()=>{alert("Open group chat window");}}
+						>
+							<View style={styles.groupContainer}>
+								<View style={styles.groupLeft}>
+									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/1150/1150575.svg"}}/>
+								</View>
+								<View style={styles.groupMiddle}>
 									<Text style={styles.groupText}>
-										. . .
+										CIS 120 Chat
 									</Text>
-								</TouchableHighlight>
+								</View>
+								<View style={styles.groupRight}>
+									<TouchableHighlight
+										onPress={()=>{alert("Open actions window");}}
+									>
+										<Text style={styles.groupText}>
+											. . .
+										</Text>
+									</TouchableHighlight>
+								</View>
 							</View>
-						</View>
-					</TouchableHighlight>
+						</TouchableHighlight>
 
-					<TouchableHighlight
-						onPress={()=>{alert("Open group chat window");}}
-					>
-						<View style={styles.groupContainer}>
-							<View style={styles.groupLeft}>
-								<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/164/164991.svg"}}/>
-							</View>
-							<View style={styles.groupMiddle}>
-								<Text style={styles.groupText}>
-									Baseball Chat
-								</Text>
-							</View>
-							<View style={styles.groupRight}>
-								<TouchableHighlight
-									onPress={()=>{alert("Open actions window");}}
-								>
+						<TouchableHighlight
+							onPress={()=>{alert("Open group chat window");}}
+						>
+							<View style={styles.groupContainer}>
+								<View style={styles.groupLeft}>
+									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/164/164991.svg"}}/>
+								</View>
+								<View style={styles.groupMiddle}>
 									<Text style={styles.groupText}>
-										. . .
+										Baseball Chat
 									</Text>
-								</TouchableHighlight>
+								</View>
+								<View style={styles.groupRight}>
+									<TouchableHighlight
+										onPress={()=>{alert("Open actions window");}}
+									>
+										<Text style={styles.groupText}>
+											. . .
+										</Text>
+									</TouchableHighlight>
+								</View>
 							</View>
-						</View>
-					</TouchableHighlight>
+						</TouchableHighlight>
 
-					<TouchableHighlight
-						onPress={()=>{alert("Open group chat window");}}
-					>
-						<View style={styles.groupContainer}>
-							<View style={styles.groupLeft}>
-								<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/149/149646.svg"}}/>
-							</View>
-							<View style={styles.groupMiddle}>
-								<Text style={styles.groupText}>
-									Music Prod Team Chat
-								</Text>
-							</View>
-							<View style={styles.groupRight}>
-								<TouchableHighlight
-									onPress={()=>{alert("Open actions window");}}
-								>
+						<TouchableHighlight
+							onPress={()=>{alert("Open group chat window");}}
+						>
+							<View style={styles.groupContainer}>
+								<View style={styles.groupLeft}>
+									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/149/149646.svg"}}/>
+								</View>
+								<View style={styles.groupMiddle}>
 									<Text style={styles.groupText}>
-										. . .
+										Music Prod Team Chat
 									</Text>
-								</TouchableHighlight>
+								</View>
+								<View style={styles.groupRight}>
+									<TouchableHighlight
+										onPress={()=>{alert("Open actions window");}}
+									>
+										<Text style={styles.groupText}>
+											. . .
+										</Text>
+									</TouchableHighlight>
+								</View>
 							</View>
-						</View>
-					</TouchableHighlight>
+						</TouchableHighlight>
 
-					<TouchableHighlight
-						onPress={()=>{alert("Open group chat window");}}
-					>
-						<View style={styles.groupContainer}>
-							<View style={styles.groupLeft}>
-								<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/33/33308.svg"}}/>
-							</View>
-							<View style={styles.groupMiddle}>
-								<Text style={styles.groupText}>
-									The Squad Chat
-								</Text>
-							</View>
-							<View style={styles.groupRight}>
-								<TouchableHighlight
-									onPress={()=>{alert("Open actions window");}}
-								>
+						<TouchableHighlight
+							onPress={()=>{alert("Open group chat window");}}
+						>
+							<View style={styles.groupContainer}>
+								<View style={styles.groupLeft}>
+									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/33/33308.svg"}}/>
+								</View>
+								<View style={styles.groupMiddle}>
 									<Text style={styles.groupText}>
-										. . .
+										The Squad Chat
 									</Text>
-								</TouchableHighlight>
+								</View>
+								<View style={styles.groupRight}>
+									<TouchableHighlight
+										onPress={()=>{alert("Open actions window");}}
+									>
+										<Text style={styles.groupText}>
+											. . .
+										</Text>
+									</TouchableHighlight>
+								</View>
 							</View>
-						</View>
-					</TouchableHighlight>
+						</TouchableHighlight>
 
-					<TouchableHighlight
-						onPress={()=>{alert("Open group chat window");}}
-					>
-						<View style={styles.groupContainer}>
-							<View style={styles.groupLeft}>
-								<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/977/977597.svg"}}/>
-							</View>
-							<View style={styles.groupMiddle}>
-								<Text style={styles.groupText}>
-									CS 305 Chat
-								</Text>
-							</View>
-							<View style={styles.groupRight}>
-								<TouchableHighlight
-									onPress={()=>{alert("Open actions window");}}
-								>
+						<TouchableHighlight
+							onPress={()=>{alert("Open group chat window");}}
+						>
+							<View style={styles.groupContainer}>
+								<View style={styles.groupLeft}>
+									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/977/977597.svg"}}/>
+								</View>
+								<View style={styles.groupMiddle}>
 									<Text style={styles.groupText}>
-										. . .
+										CS 305 Chat
 									</Text>
-								</TouchableHighlight>
+								</View>
+								<View style={styles.groupRight}>
+									<TouchableHighlight
+										onPress={()=>{alert("Open actions window");}}
+									>
+										<Text style={styles.groupText}>
+											. . .
+										</Text>
+									</TouchableHighlight>
+								</View>
 							</View>
-						</View>
-					</TouchableHighlight>
+						</TouchableHighlight>
 
 
-				</View>
+					</View>
 
 
-			</ScrollView>
-		</View>
-	);
+				</ScrollView>
+			</View>
+		);
+	}
+
 }
 
 ChatroomListScreen.navigationOptions = {

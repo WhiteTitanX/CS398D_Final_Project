@@ -1,0 +1,9 @@
+chatroom message:
+{
+    messageID: string, //not really needed
+    chatroomID: string,
+    publicUserProfile: PublicUserProfile, //Who posted it
+    timestamp: new Date().getTime(),
+}
+
+
