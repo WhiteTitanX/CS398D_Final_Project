@@ -30,7 +30,6 @@ const firebaseConfig = {
 	messagingSenderId: "826894141261",
 	appId: "1:826894141261:web:8723b45db8e735ad131904"
 };
-
 firebase.initializeApp(firebaseConfig);
 
 global.firebase = {
@@ -38,6 +37,8 @@ global.firebase = {
 	auth:firebase.auth(),
 	database:firebase.database()
 };
+global.firebase.authHelper.checkAuth = checkAuth;
+global.firebase.authHelper.logOut = firebase.auth().signOut;
 
 function checkAuth(){
 	return new Promise((resolve, reject) => {
@@ -51,9 +52,6 @@ function checkAuth(){
 		});
 	});
 }
-
-global.firebase.authHelper.checkAuth = checkAuth;
-global.firebase.authHelper.logOut = firebase.auth().signOut;
 
 const LoggedOutStack = createStackNavigator(
 	{

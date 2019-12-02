@@ -4,8 +4,15 @@ import {Text, TouchableHighlight, View} from "react-native";
 export default class ChatroomListScreen extends React.Component {
     static navigationOptions = {
         title: 'Chatroom List',
-        /* No more header config here! */
+        headerRight: () => (
+            <TouchableHighlight
+                onPress={()=>{alert("hello");}}
+            >
+                <View style={{paddingRight: 15,paddingLeft:10, paddingBottom: 5}}><Text style={{fontSize: 24}}>+</Text></View>
+            </TouchableHighlight>
+        ),
     };
+
     render() {
         global.firebase.auth.onAuthStateChanged(user=>{
             if(!user){
