@@ -7,7 +7,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { StatusBar } from 'react-native';
 
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
 
 let deviceH = Dimensions.get('screen').height;
 let windowH = Dimensions.get('window').height;
