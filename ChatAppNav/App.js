@@ -84,7 +84,12 @@ class SignupScreen extends React.Component {
 
 const RootStack = createStackNavigator(
 	{
-		Login: LoginScreen,
+		Login: {
+			screen: LoginScreen,
+			navigationOptions: {
+				header: null
+			}
+		},
 		Signup: SignupScreen,
 	},
 	{
