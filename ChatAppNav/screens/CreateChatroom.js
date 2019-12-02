@@ -2,6 +2,10 @@ import * as React from "react";
 import {Text, TouchableHighlight, View, TextInput, ImageBackground} from "react-native";
 
 export default class CreateChatroomScreen extends React.Component {
+    static navigationOptions = {
+        title: 'Create Chatroom'
+    };
+
     state = {
         chatroomName: '',
         users: '',

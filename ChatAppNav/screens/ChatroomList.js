@@ -2,7 +2,7 @@ import * as React from "react";
 import {Text, TouchableHighlight, View, ScrollView, Image} from "react-native";
 import {Menu, MenuOptions, MenuOption, MenuTrigger} from "react-native-popup-menu";
 
-export default class ChatroomListScreen extends React.Component {
+export default class ChatroomList extends React.Component {
     static navigationOptions = props => {
         return {
             title: 'Chatroom List',
@@ -12,7 +12,9 @@ export default class ChatroomListScreen extends React.Component {
                         <Text style={{fontSize: 18, padding:2}}>☰</Text>
                     </MenuTrigger>
                     <MenuOptions>
-                        <MenuOption onSelect={() => {alert("pog");}}>
+                        <MenuOption onSelect={() => {
+                            props.navigation.navigate('ContactListScreen');
+                        }}>
                             <Text style={{padding: 5, fontSize: 16}}>Contacts</Text>
                         </MenuOption>
                         <MenuOption onSelect={() => {

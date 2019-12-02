@@ -17,9 +17,10 @@ import * as FirebaseAuthHelper from './services/firebase-auth';
 
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from "./screens/SignupScreen";
-import ChatroomListScreen from "./screens/ChatroomListScreen";
+import ChatroomList from "./screens/ChatroomList";
 import CreateChatroom from "./screens/CreateChatroom";
 import JoinChatroom from "./screens/JoinChatroom";
+import ContactList from "./screens/ContactList";
 
 let deviceH = Dimensions.get('screen').height;
 let windowH = Dimensions.get('window').height;
@@ -109,9 +110,10 @@ const LoggedOutStack = createStackNavigator(
 
 const LoggedInStack = createStackNavigator(
 	{
-		ChatroomListScreen: ChatroomListScreen,
+		ChatroomListScreen: ChatroomList,
 		CreateChatroomScreen: CreateChatroom,
 		JoinChatroomScreen: JoinChatroom,
+		ContactListScreen: ContactList
 	},
 	{
 		initialRouteName: 'ChatroomListScreen',

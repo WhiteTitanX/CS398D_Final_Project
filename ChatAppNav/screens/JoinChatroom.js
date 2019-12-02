@@ -2,6 +2,10 @@ import * as React from "react";
 import {Text, TouchableHighlight, View, TextInput, ImageBackground} from "react-native";
 
 export default class JoinChatroomScreen extends React.Component {
+    static navigationOptions = {
+        title: 'Join Chatroom'
+    };
+
     state = {
         chatroomName: ''
     };
