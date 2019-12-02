@@ -3,13 +3,14 @@ import { Button, View,
 	Text, StyleSheet, Image, TextInput,
 	TouchableHighlight, ImageBackground,
 	Dimensions, Platform } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { StatusBar } from 'react-native';
 
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
+
 
 let deviceH = Dimensions.get('screen').height;
 let windowH = Dimensions.get('window').height;
@@ -29,13 +30,41 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+global.firebase = {
+	authHelper:{},
+	auth:firebase.auth(),
+	database:firebase.database()
+};
+
+function checkAuth(){
+	return new Promise((resolve, reject) => {
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				//If logged in, navigate to chatroom list screen.
+				resolve(true);
+			} else {
+				reject(false);
+			}
+		});
+	});
+}
+
+global.firebase.authHelper.checkAuth = checkAuth;
+global.firebase.authHelper.logOut = firebase.auth().signOut;
+
 class LoginScreen extends React.Component {
+
 	state = {
 		username: '',
 		password: ''
 	};
 
 	render() {
+		global.firebase.auth.onAuthStateChanged(user=>{
+			if(user){
+				this.props.navigation.navigate('App');
+			}
+		});
 		return (
 
 			<View style={styles.container}>
@@ -50,7 +79,7 @@ class LoginScreen extends React.Component {
 					<Text style={styles.title}>Chat App</Text>
 					<TextInput style={styles.loginInput}
 										 onChangeText={(username) => this.setState({username})}
-										 placeholder='Username'
+										 placeholder='Email'
 					/>
 					<TextInput style={styles.loginInput}
 										 onChangeText={(password) => this.setState({password})}
@@ -58,7 +87,7 @@ class LoginScreen extends React.Component {
 					/>
 					<View style={styles.row}>
 						<TouchableHighlight
-							onPress={()=>{alert("Open group chat window");}}
+							onPress={()=>{global.firebase.auth.signInWithEmailAndPassword(this.state.username,this.state.password)}}
 						>
 							<View style={styles.button}><Text style={styles.buttonText}>Login</Text></View>
 						</TouchableHighlight>
@@ -79,12 +108,37 @@ class SignupScreen extends React.Component {
 		return (
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 				<Text>Sign Up Screen</Text>
+
 			</View>
 		);
 	}
 }
 
-const RootStack = createStackNavigator(
+class ChatroomListScreen extends React.Component {
+	static navigationOptions = {
+		title: 'Chatroom List',
+		/* No more header config here! */
+	};
+	render() {
+		global.firebase.auth.onAuthStateChanged(user=>{
+			if(!user){
+				this.props.navigation.navigate('AuthLoading');
+			}
+		});
+		return (
+			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+				<Text>Chatroom List Screen</Text>
+				<TouchableHighlight
+					onPress={()=>{global.firebase.auth.signOut()}}
+				>
+					<View style={styles.button}><Text style={styles.buttonText}>Sign Out</Text></View>
+				</TouchableHighlight>
+			</View>
+		);
+	}
+}
+
+const LoggedOutStack = createStackNavigator(
 	{
 		Login: {
 			screen: LoginScreen,
@@ -99,14 +153,35 @@ const RootStack = createStackNavigator(
 	}
 );
 
-const AppContainer = createAppContainer(RootStack);
+const LoggedInStack = createStackNavigator(
+	{
+		ChatroomListScreen: ChatroomListScreen,
+	},
+	{
+		initialRouteName: 'ChatroomListScreen',
+	}
+);
 
+export default createAppContainer(
+	createSwitchNavigator(
+		{
+			AuthLoading: LoggedOutStack,
+			App: LoggedInStack,
+		},
+		{
+			initialRouteName: 'AuthLoading',
+		}
+	)
+);
+
+//const AppContainer = createAppContainer(LoggedOutStack);
+/*
 export default class App extends React.Component {
 	render() {
 		return <AppContainer />;
 	}
 }
-
+*/
 const styles = StyleSheet.create({
 	container:{
 		flex: 1,
