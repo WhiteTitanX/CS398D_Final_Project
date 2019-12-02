@@ -9,166 +9,73 @@ import {
 	TouchableOpacity,
 	TouchableHighlight,
 	View,
+	Dimensions,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
-export default class ChatroomListScreen extends React.Component {
-	render(){
-		setInterval(()=>{
-			this.setState({});
-		},100);
-		return (
-			<View style={styles.container}>
-				<ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
 
-					<View style={styles.titleBarContainer}>
-						<View style={styles.titleBarLeft}>
-							<Text style={styles.titleBarText}>
-								Chatroom List
-							</Text>
-						</View>
-						<View style={styles.titleBarRight}>
-							<TouchableHighlight
-								onPress={()=>{alert("Add the group id");}}
-							>
-								<Text style={styles.titleBarText}>
-									Add +
-								</Text>
-							</TouchableHighlight>
-						</View>
-					</View>
-
-					<View>
-						<TouchableHighlight
-							onPress={()=>{alert("Open group chat window");}}
-						>
-							<View style={styles.groupContainer}>
-								<View style={styles.groupLeft}>
-									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/1150/1150575.svg"}}/>
-								</View>
-								<View style={styles.groupMiddle}>
-									<Text style={styles.groupText}>
-										CIS 120 Chat
-									</Text>
-								</View>
-								<View style={styles.groupRight}>
-									<TouchableHighlight
-										onPress={()=>{alert("Open actions window");}}
-									>
-										<Text style={styles.groupText}>
-											. . .
-										</Text>
-									</TouchableHighlight>
-								</View>
-							</View>
-						</TouchableHighlight>
-
-						<TouchableHighlight
-							onPress={()=>{alert("Open group chat window");}}
-						>
-							<View style={styles.groupContainer}>
-								<View style={styles.groupLeft}>
-									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/164/164991.svg"}}/>
-								</View>
-								<View style={styles.groupMiddle}>
-									<Text style={styles.groupText}>
-										Baseball Chat
-									</Text>
-								</View>
-								<View style={styles.groupRight}>
-									<TouchableHighlight
-										onPress={()=>{alert("Open actions window");}}
-									>
-										<Text style={styles.groupText}>
-											. . .
-										</Text>
-									</TouchableHighlight>
-								</View>
-							</View>
-						</TouchableHighlight>
-
-						<TouchableHighlight
-							onPress={()=>{alert("Open group chat window");}}
-						>
-							<View style={styles.groupContainer}>
-								<View style={styles.groupLeft}>
-									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/149/149646.svg"}}/>
-								</View>
-								<View style={styles.groupMiddle}>
-									<Text style={styles.groupText}>
-										Music Prod Team Chat
-									</Text>
-								</View>
-								<View style={styles.groupRight}>
-									<TouchableHighlight
-										onPress={()=>{alert("Open actions window");}}
-									>
-										<Text style={styles.groupText}>
-											. . .
-										</Text>
-									</TouchableHighlight>
-								</View>
-							</View>
-						</TouchableHighlight>
-
-						<TouchableHighlight
-							onPress={()=>{alert("Open group chat window");}}
-						>
-							<View style={styles.groupContainer}>
-								<View style={styles.groupLeft}>
-									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/33/33308.svg"}}/>
-								</View>
-								<View style={styles.groupMiddle}>
-									<Text style={styles.groupText}>
-										The Squad Chat
-									</Text>
-								</View>
-								<View style={styles.groupRight}>
-									<TouchableHighlight
-										onPress={()=>{alert("Open actions window");}}
-									>
-										<Text style={styles.groupText}>
-											. . .
-										</Text>
-									</TouchableHighlight>
-								</View>
-							</View>
-						</TouchableHighlight>
-
-						<TouchableHighlight
-							onPress={()=>{alert("Open group chat window");}}
-						>
-							<View style={styles.groupContainer}>
-								<View style={styles.groupLeft}>
-									<Image style={styles.groupImage} source={{uri: "https://image.flaticon.com/icons/svg/977/977597.svg"}}/>
-								</View>
-								<View style={styles.groupMiddle}>
-									<Text style={styles.groupText}>
-										CS 305 Chat
-									</Text>
-								</View>
-								<View style={styles.groupRight}>
-									<TouchableHighlight
-										onPress={()=>{alert("Open actions window");}}
-									>
-										<Text style={styles.groupText}>
-											. . .
-										</Text>
-									</TouchableHighlight>
-								</View>
-							</View>
-						</TouchableHighlight>
-
-
-					</View>
-
-
-				</ScrollView>
-			</View>
-		);
+export default function ChatroomListScreen() {
+	state = {
+		groups: [
+			{
+				groupName: 'CIS120 Chat',
+				groupImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Rr4Yntjn6QIhXmPESm1Grv2YodbvfuXyi_8JRHSnb6EQz1OZ6g&s',
+			},
+			{
+				groupName: 'Baseball Chat',
+				groupImage: 'https://www.baseballprospectus.com/wp-content/uploads/2019/04/baseball-on-dirt-1000x714.jpg',
+			},
+			{
+				groupName: 'Music Production Team Chat',
+				groupImage: 'https://pmcvariety.files.wordpress.com/2019/01/apple-music.jpg?w=1000&h=563&crop=1',
+			},
+			{
+				groupName: 'The Squad Chat',
+				groupImage: 'https://s3.amazonaws.com/s3.mp-cdn.net/56/e7/341a69a52dfdace8ffc671b0b743-is-the-wall-street-journal-stupid.jpg',
+			},
+		]
 	}
+	return (
+		<View style={styles.container}>
+				<View style={styles.titleBarContainer}>
+					<View style={styles.titleBarLeft}>
+						<Text style={styles.titleBarText}>
+							Your Chats
+						</Text>
+					</View>
+						<TouchableHighlight
+							onPress={()=>{alert("Add the group id");}}
+						>
+							<View style={styles.add}>
+								<Text style={styles.titleBarText}>
+									+
+								</Text>
+							</View>
+						</TouchableHighlight>
+				</View>
 
+				<ScrollView>
+        			<View style={styles.contactsContainer}>
+        				{this.state.groups.map((gName) => (
+          					<TouchableHighlight 
+            					onPress={() => { 
+             					alert('Text the contact') 
+            				}} >
+								<View style={styles.contactContainer}>
+									<Text style={styles.contactName}>
+										{gName.groupName}
+									</Text>
+								</View>
+          					</TouchableHighlight>
+						)
+						)}
+					</View>
+				</ScrollView>				
+		</View>
+	);
 }
 
 ChatroomListScreen.navigationOptions = {
@@ -181,35 +88,38 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 	},
 	titleBarContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		height: deviceHeight / 9,
 		borderBottomWidth: 1,
-		padding: 10,
-		borderColor: '#d9d9d9',
-		flexDirection: 'row'
+		borderBottomColor: '#d9d9d9',
+		paddingTop: 30,
+		alignItems: 'flex-end',
 	},
 	titleBarLeft: {
-		textAlign: 'left',
-		flex: 1
+		marginLeft: 10,
+    	paddingBottom: 10,
 	},
 	titleBarRight: {
 		textAlign: 'right',
 		flex: 1
 	},
 	titleBarText:{
-		fontSize: 20,
-		color: 'rgba(96,100,109, 1)',
-		lineHeight: 24,
+		fontSize: deviceHeight / 20,
+    	fontWeight: 'bold',
 	},
 	groupImage: {
 		borderRadius: 15,
 		padding: 10,
-		width: 52,
-		height: 52
+		deviceHeight: 2*(deviceHeight/20),
+		width: 2*(deviceHeight/20),
 	},
 	groupContainer: {
-		flexDirection: 'row',
-		padding: 10,
+		height: 3*(deviceHeight/20),
+		width: deviceWidth,
 		borderBottomWidth: 1,
-		borderColor: '#d9d9d9'
+		borderBottomColor: '#d9d9d9',
+		justifyContent: 'center',
 	},
 	groupText: {
 		fontSize: 18,
@@ -296,7 +206,6 @@ const styles = StyleSheet.create({
 	},
 	tabBarInfoText: {
 		fontSize: 17,
-		color: 'rgba(96,100,109, 1)',
 		textAlign: 'center',
 	},
 	navigationFilename: {
@@ -312,5 +221,37 @@ const styles = StyleSheet.create({
 	helpLinkText: {
 		fontSize: 14,
 		color: '#2e78b7',
+	},
+	groupsContainer: {
+		flexDirection: 'row',
+    height: 8*(deviceHeight/9),
+	},
+	groupNameContainer: {
+		height: 3*(deviceHeight/20),
+		width: deviceWidth,
+		borderBottomWidth: 1,
+		borderBottomColor: '#d9d9d9',
+		justifyContent: 'center',
+	},
+	groupTextName: {
+		fontSize: deviceHeight/35,
+		paddingLeft: 20,
+		color: 'rgba(96,100,109, 1)',
+	},
+	contactContainer: {
+		height: 2*(deviceHeight/20),
+		width: deviceWidth,
+		borderBottomWidth: 1,
+		borderBottomColor: '#d9d9d9',
+		justifyContent: 'center',
+	},
+	contactName: {
+		fontSize: deviceHeight/35,
+		paddingLeft: 20,
+		color: 'rgba(96,100,109, 1)',
+	},
+	add: {
+		marginRight: 10,
+		paddingBottom: 10,
 	},
 });

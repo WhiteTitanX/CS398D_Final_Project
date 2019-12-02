@@ -9,10 +9,14 @@ import {
   TouchableOpacity,
   View,
   TextInput,
+  Dimensions,
 } from 'react-native';
 import { MonoText } from '../components/StyledText';
 import Colors from "../constants/Colors";
 import {Ionicons} from "@expo/vector-icons";
+
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
 
 export default function ChatRoomScreen() {
 
@@ -27,11 +31,12 @@ export default function ChatRoomScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.headerContainer,styles.headerStyle]}>
-        <Text style={styles.headerText}>
-          Chat With {name}
-        </Text>
+      <View style={[styles.headerContainer]}>
+          <Text style={styles.headerText}>
+            Chat With {name}
+          </Text>
       </View>
+      
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
@@ -104,6 +109,8 @@ ChatRoomScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: deviceHeight,
+    width: deviceWidth,
     //backgroundColor: '#fff',
   },
   developmentModeText: {
@@ -151,7 +158,7 @@ const styles = StyleSheet.create({
   },
   headerBarContainer: {
     alignItems: 'center',
-    backgroundColor: 'cream',
+    backgroundColor: 'green',
     paddingVertical: 0,
   },
   tabBarInfoContainer: {
@@ -197,13 +204,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     height: 50,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#F2F2F2',
     alignItems: 'center',
     paddingLeft: 20,
-    paddingRight: 10
+    paddingRight: 10,
   },
   viewTextInput: {
     flex: 1,
+    fontSize: deviceHeight/48,
   },
 
   // Message right
@@ -215,14 +223,15 @@ const styles = StyleSheet.create({
   },
   textItemRight: {
     borderRadius: 10,
-    width: 170,
-    backgroundColor: 'lightskyblue',
+    width: deviceWidth/2,
+    backgroundColor: '#8AEA95',
     color: 'black',
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 10,
     paddingRight: 10,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    fontSize: deviceHeight/48,
   },
 
   // Message left
@@ -233,39 +242,40 @@ const styles = StyleSheet.create({
   },
   textItemLeft: {
     borderRadius: 10,
-    width: 170,
-    backgroundColor: '#203152',
+    width: deviceWidth/2,
+    backgroundColor: '#63D471',
     color: 'white',
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 10,
     paddingRight: 10,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    fontSize: deviceHeight/48,
   },
   avatarItemLeft: {
-    width: 30,
-    height: 30,
+    width: deviceWidth/12,
+    height: deviceWidth/12,
     borderRadius: 15,
     marginLeft: 10
   },
   // my own styles for titleAndIcon
   headerContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingLeft: 8,
+    height: deviceHeight / 9,
+    borderBottomWidth: 1,
+    borderBottomColor: '#d9d9d9',
+    paddingTop: 30,
+    alignItems: 'flex-end',
   },
-  headerStyle: {
-    backgroundColor: '#455a64',
-  },
+  //headerStyle: {
+    //backgroundColor: '#455a64',
+  //},
   // my own styles for titleAndIcon
   headerText: {
     paddingLeft: 8,
-    color: '#d9d9d9',
     fontFamily: 'NotoSans-Regular',
-    fontSize: 20,
-    textAlign: 'center',
+    fontSize: deviceHeight / 20,
+    fontWeight: 'bold',
     width: '100%'
   }
-
 });

@@ -11,162 +11,101 @@ import {
   Dimensions,
   TouchableHighlight,
 } from 'react-native';
-
+import Constants from 'expo-constants';
 import { MonoText } from '../components/StyledText';
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
 export default function ContactsScreen() {
+  state = {
+    contacts: [
+      {
+        name: 'Amanda Smith',
+        number: 0,
+        username: '',
+      },
+      {
+        name: 'Jared Leto',
+        number: 0,
+        username: '',
+      },
+      {
+        name: 'Hailey Brown',
+        number: 0,
+        username: '',
+      },
+      {
+        name: 'Joshua Davis',
+        number: 0,
+        username: '',
+      },
+      {
+        name: 'Jack Pearson',
+        number: 0,
+        username: '',
+      },
+      {
+        name: 'Garry Hamilton',
+        number: 0,
+        username: '',
+      },
+      {
+        name: 'Leah Wilson',
+        number: 0,
+        username: '',
+      },
+    ],
+  };
+
   return (
     <View style={styles.container}>
-
       <View style={styles.titleContainer}>
-      <View style={styles.contactsTitile}>
-        <Text style={styles.contactText}>Contacts</Text>
-      </View>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Add conctact') 
-          }} >
-          <View style={styles.add}>
-            <Text style={styles.contactText}>
-              +
-            </Text>
+        <View style={styles.contactsTitile}>
+          <Text style={styles.contactText}>Contacts</Text>
         </View>
+        <TouchableHighlight
+          onPress={() => {
+            alert('Add contact');
+          }}>
+          <View style={styles.add}>
+            <Text style={styles.contactText}>+</Text>
+          </View>
         </TouchableHighlight>
       </View>
 
       <View style={styles.userContainer}>
-        <TouchableHighlight style={styles.userDetailsButton}
-          onPress={() => { 
-                        alert('User Information') 
-                    }} >
+        <TouchableHighlight
+          style={styles.userDetailsButton}
+          onPress={() => {
+            alert('User Information');
+          }}>
           <View style={styles.user}>
             <Image
-              source={{ uri:'https://cdn.esquimaltmfrc.com/wp-content/uploads/2015/09/flat-faces-icons-circle-man-9-720x720.png'}}
+              source={{
+                uri:
+                  'https://cdn.esquimaltmfrc.com/wp-content/uploads/2015/09/flat-faces-icons-circle-man-9-720x720.png',
+              }}
               style={styles.avatarStyle}
             />
-            <Text style={styles.userName}>
-              Jack Black
-            </Text>
+            <Text style={styles.userName}>Jack Black</Text>
           </View>
         </TouchableHighlight>
       </View>
-      
+
       <ScrollView>
-      <View style={styles.contactsContainer}>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Amanda Smith
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Jared Leto
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Hailey Brown
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Joshua Davis
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Martha Jones
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Ezra Miller
-            </Text>
-          </View>
-        </TouchableHighlight>
-         <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Jack Pearson
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Garry Hamilton
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Leah Wilson
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Felix King
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight 
-          onPress={() => { 
-            alert('Text the contact') 
-          }} >
-          <View style={styles.contactContainer}>
-            <Text style={styles.contactName}>
-              Jakub Lewandowski
-            </Text>
-          </View>
-        </TouchableHighlight>
-      </View>
+        <View style={styles.contactsContainer}>
+          {this.state.contacts.map(con => (
+            <TouchableHighlight
+              onPress={() => {
+                alert('Text the contact');
+              }}>
+              <View style={styles.contactContainer}>
+                <Text style={styles.contactName}>{con.name}</Text>
+              </View>
+            </TouchableHighlight>
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
@@ -276,7 +215,7 @@ const styles = StyleSheet.create({
   contactText: {
     fontSize: deviceHeight / 20,
     fontWeight: 'bold',
-    color: 'rgba(96,100,109, 1)',
+    //color: 'rgba(96,100,109, 1)',
   },
   avatarStyle: {
     width: deviceHeight / 15,
@@ -285,7 +224,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   userName: {
-    fontSize: deviceHeight/30,
+    fontSize: deviceHeight / 30,
     color: 'black',
     marginLeft: 20,
   },
@@ -294,17 +233,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#d9d9d9',
-    height: deviceHeight/10,
+    height: deviceHeight / 10,
   },
   contactContainer: {
-    height: deviceHeight/20,
+    height: deviceHeight / 20,
     width: deviceWidth,
     borderBottomWidth: 1,
     borderBottomColor: '#d9d9d9',
     justifyContent: 'center',
   },
   contactName: {
-    fontSize: deviceHeight/35,
+    fontSize: deviceHeight / 35,
     paddingLeft: 20,
     color: 'rgba(96,100,109, 1)',
   },
@@ -315,6 +254,5 @@ const styles = StyleSheet.create({
   add: {
     marginRight: 10,
     paddingBottom: 10,
-  }
-
+  },
 });

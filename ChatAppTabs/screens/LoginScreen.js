@@ -1,183 +1,122 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  AppRegistry, Text, View, StyleSheet, ImageBackground, TextInput, Image, TouchableHighlight
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+  TouchableHighlight,
+  TextInput,
 } 
-from 'react-native';
 
+from 'react-native';
+import Constants from 'expo-constants';
 import { MonoText } from '../components/StyledText';
-import { Constants } from 'expo';
-export default class App extends Component {
+
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
+
+export default function LoginScreen() {
     state = {
-        firstname: '',
+        name: '',
         username: '',
         password: '',
-        phonenumber: '',
-        lastname: '',
-        
+        number: '',     
     };
 
-    _handleTextChange = inputValue => {
-        this.setState({ inputValue });
-    
-};
-    render() {
-        return (
-            
+
+    return (
             <View style={styles.container}>
-            
-                <ImageBackground
-                    style={styles.background}
-                    source={{ uri: 'https://codehs.com/uploads/802894298a13da568102a68e0aa4098f' }}
-                >
-        
-                <View style={styles.top}>
-                    <Text style={styles.paragraph}>
-                    YOU ARE ALMOST THERE!
-                    
-                    </Text>
-                     </View>
-                     
-                     <Image
-                         source={{ uri: 'https://codehs.com/uploads/a0040bc1d6f8418011ce8f239068af3d' }}
-                         style={{ height: 80, width: 300 }}
-                     />
-                 
-                    <View style={styles.middle}>
-                    <Text style={styles.paragraph}>
-                    First Name:
-                    
-                    </Text>
-                    
-                    < TextInput style={styles.firstnameInput}
-                onChangeText={(firstname) => this.setState({firstname})}
-                value={this.state.firstname}
-                        style={{ width: 250, height: 44, padding: 8, backgroundColor: 'grey', borderRadius: 20, marginLeft: 20, color: 'white'}}
-                    />
-                    <Text style={styles.paragraph}>
-                    Last Name:
-                    
-                    </Text>
-                    
-                    <TextInput style={styles.lastnameInput}
-                onChangeText={(lastname) => this.setState({lastname})}
-                value={this.state.lastname}
-                        style={{ width: 250, height: 44, padding: 8, backgroundColor: 'grey', borderRadius: 20, marginLeft: 20, color: 'white'}}
-                    />
-                    <Text style={styles.paragraph}>
-                    UserName:
-                    
-                    </Text>
-                    
-                    <TextInput style={styles.usernameInput}
-                onChangeText={(username) => this.setState({username})}
-                value={this.state.username}
-                        style={{ width: 250, height: 44, padding: 8, backgroundColor: 'grey', borderRadius: 20, marginLeft: 20, color: 'white'}}
-                    />
-                    <Text style={styles.paragraph}>
-                    Password:
-                    
-                    </Text>
-                    
-                    <TextInput style={styles.passwordInput}
-                onChangeText={(password) => this.setState({password})}
-                value={this.state.password}
-                        style={{ width: 250, height: 44, padding: 8, backgroundColor: 'grey', borderRadius: 20, marginLeft: 20, color: 'white'}}
-                    />
-                    <Text style={styles.paragraph}>
-                    Phone Number:
-                    
-                    </Text>
-                    
-                    <TextInput style={styles.phonenumberInput}
-                onChangeText={(phonenumber) => this.setState({phonenumber})}
-                value={this.state.phonenumber}
-                        style={{ width: 250, height: 44, padding: 8, backgroundColor: 'grey', borderRadius: 20, marginLeft: 20, color: 'white'}}
-                    />
-                    
+
+                <View style={styles.appLogo}>
+                  <Text style={styles.logoGroup}>
+                        Group 
+                  </Text>
+                  <Text style={styles.logoChat}>
+                        Chat
+                  </Text>  
+                </View>
+
+                    <View style={styles.questionContainer}>
+                        <Text style={styles.question}>
+                            Do you need to sign up or log in?
+                        </Text>
                     </View>
-                    
-                    <View style={styles.bottom}>
-                    
-                    
-                        
-                        <TouchableHighlight
-                            onPress={() => {
-                                alert('You Have Signed Up Successfully!')
-                            }}
-                        >
-                        
-                            <View style={styles.box}>
-                            
-                                <Text style={styles.text}>
-                                SIGN UP
-                                </Text>
-                            
-                            </View>
-                        
-                        </TouchableHighlight>
-                    
-                    
-                    
+                    <View style={styles.buttonView}>
+                      <TouchableHighlight>
+                          <View style={styles.buttonL}>
+                              <Text style={styles.textSorL}>
+                                  Log In
+                              </Text>
+                          </View>
+                      </TouchableHighlight>
+                      <TouchableHighlight>
+                          <View style={styles.buttonL}>
+                              <Text style={styles.textSorL}>
+                                  Sign Up
+                              </Text>
+                          </View>
+                      </TouchableHighlight>
                     </View>
-    
-                </ImageBackground>
-                
+
             </View>
         );
     }
-}
+
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-      
-    
-      
+        height: deviceHeight,
+        width: deviceWidth,
+        backgroundColor: '#C8C2AE',
     },
-    top: {
-     flex: 1,
-        width: 300,
-        
+    appLogo: {
+      height: deviceHeight/5,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-    middle: {
-        flex: 3,
-        width: 300,
-        
+    logoChat: {
+      fontSize: deviceHeight/10,
+      color: '#6CC551',
+      fontFamily: 'Avenir',
     },
-    background: {
-        width: 300,
-        height: 540,
-        
+    logoGroup: {
+        fontSize: deviceHeight/10,
+        fontFamily: 'Avenir',
     },
-    paragraph: {
-        fontSize: 25,
-        fontWeight: 'bold',
-     
-        color: 'white',
-    },
-    text: {
-        fontSize: 20,
-        fontWeight: 'bold',
-       
-        color: 'white',
-    },
-    bottom: {
-        
-       flex: 1,
-         alignItems: 'center',
-       
-         justifyContent: 'center',
-        alignItems: 'center',
-    },
-    box: {
-        height: 44,
-        width: 100,
+    questionContainer: {
+        height: deviceHeight/7,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#307172',
-        borderRadius: 20,
-      
-        
+        marginTop: deviceHeight/20,
+        marginBottom: deviceHeight/20,
+    },
+    question: {
+        fontFamily: 'Avenir',
+        fontSize: deviceHeight/25,
+        textAlign: 'center',
+    },
+    buttonL: {
+        height: deviceHeight/13,
+        width: 2*(deviceWidth/3),
+        backgroundColor: '#447604',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: deviceHeight/15,
+        borderRadius: 15,
+    },
+    textSorL: {
+        fontFamily: 'Avenir',
+        color: 'white',
+        fontSize: deviceHeight/20,
+    },
+    buttonView: {
+      alignItems: 'center',
+      justifyContent: 'space-around',
     }
+
 });
