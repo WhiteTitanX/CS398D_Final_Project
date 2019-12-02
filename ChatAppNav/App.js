@@ -6,6 +6,7 @@ import { Button, View,
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { StatusBar } from 'react-native';
+import {MenuProvider} from "react-native-popup-menu";
 
 import * as firebase from 'firebase/app';
 import 'firebase/database';
@@ -17,6 +18,8 @@ import * as FirebaseAuthHelper from './services/firebase-auth';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from "./screens/SignupScreen";
 import ChatroomListScreen from "./screens/ChatroomListScreen";
+import CreateChatroom from "./screens/CreateChatroom";
+import JoinChatroom from "./screens/JoinChatroom";
 
 let deviceH = Dimensions.get('screen').height;
 let windowH = Dimensions.get('window').height;
@@ -107,13 +110,15 @@ const LoggedOutStack = createStackNavigator(
 const LoggedInStack = createStackNavigator(
 	{
 		ChatroomListScreen: ChatroomListScreen,
+		CreateChatroomScreen: CreateChatroom,
+		JoinChatroomScreen: JoinChatroom,
 	},
 	{
 		initialRouteName: 'ChatroomListScreen',
 	}
 );
 
-export default createAppContainer(
+const AppContainer = createAppContainer(
 	createSwitchNavigator(
 		{
 			AuthLoading: LoggedOutStack,
@@ -124,6 +129,16 @@ export default createAppContainer(
 		}
 	)
 );
+
+export default class App extends React.Component {
+	render() {
+		return (
+			<MenuProvider>
+				<AppContainer />
+			</MenuProvider>
+		);
+	}
+}
 
 global.styles = StyleSheet.create({
 	container:{
@@ -169,5 +184,20 @@ global.styles = StyleSheet.create({
 	row:{
 		flexDirection: 'row',
 		marginTop: 30
-	}
+	},
+	contactContainer: {
+		height: 2*(deviceHeight/20),
+		width: deviceWidth,
+		borderBottomWidth: 1,
+		borderBottomColor: '#d9d9d9',
+		paddingLeft: 15,
+		alignItems: 'center',
+		flexDirection: 'row',
+
+	},
+	contactName: {
+		fontSize: deviceWidth/20,
+		paddingLeft: 20,
+		color: 'rgba(96,100,109, 1)',
+	},
 });
