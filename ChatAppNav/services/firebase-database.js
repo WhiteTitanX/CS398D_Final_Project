@@ -93,6 +93,39 @@ exports.joinChatRoom = function(chatroomName){
   });
 };
 
+exports.LeaveChatRoom = function(chatroomName){
+  return new Promise((resolve, reject) => {
+    global.firebase.database().ref(exports.getChatroomPath())
+    //.once('value')
+      .orderByChild('name')
+      .equalTo(chatroomName)
+      .once('value')
+      .then(data => {
+        //console.log(data.val());
+        let chatrooms = data.val();
+        for(let key in chatrooms){
+          console.log(chatrooms[key].name);
+          if(chatrooms[key].name===chatroomName){
+            let update = {};
+            update[key] = chatrooms[key];
+            global.firebase.database().ref(exports.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid))
+              .remove()
+              .then(()=>{
+                resolve();
+              })
+              .catch(error=>{
+                reject(error);
+              });
+          }
+        }
+        //reject('No Chatroom with that name');
+      })
+      .catch(error=>{
+        reject(error);
+      });
+  });
+};
+
 exports.getJoinedChatroomList = function(){
   return new Promise((resolve, reject) => {
     global.firebase.database().ref(exports.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid))
@@ -109,6 +142,7 @@ exports.getJoinedChatroomList = function(){
       });
   });
 };
+
 
 exports.sendMessages = function (messages,chatroomID){
   return new Promise((resolve, reject) => {
