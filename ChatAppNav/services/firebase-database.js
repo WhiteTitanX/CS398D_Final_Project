@@ -93,32 +93,12 @@ exports.joinChatRoom = function(chatroomName){
   });
 };
 
-exports.LeaveChatRoom = function(chatroomName){
+exports.LeaveChatRoom = function(chatroomID){
   return new Promise((resolve, reject) => {
-    global.firebase.database().ref(exports.getChatroomPath())
-    //.once('value')
-      .orderByChild('name')
-      .equalTo(chatroomName)
-      .once('value')
-      .then(data => {
-        //console.log(data.val());
-        let chatrooms = data.val();
-        for(let key in chatrooms){
-          console.log(chatrooms[key].name);
-          if(chatrooms[key].name===chatroomName){
-            let update = {};
-            update[key] = chatrooms[key];
-            global.firebase.database().ref(exports.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid))
-              .remove()
-              .then(()=>{
-                resolve();
-              })
-              .catch(error=>{
-                reject(error);
-              });
-          }
-        }
-        //reject('No Chatroom with that name');
+    global.firebase.database().ref(exports.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid,key))
+      .remove()
+      .then(()=>{
+        resolve();
       })
       .catch(error=>{
         reject(error);
