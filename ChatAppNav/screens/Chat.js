@@ -15,7 +15,8 @@ export default class Chat extends React.Component {
                     </MenuTrigger>
                     <MenuOptions>
                         <MenuOption onSelect={() => {
-                            alert("Why you gotta leave?");
+                            global.firebase.databaseHelper.LeaveChatRoom(props.navigation.getParam('key'));
+                            props.navigation.goBack();
                         }}>
                             <Text style={{padding: 5, fontSize: 16}}>Leave Chatroom</Text>
                         </MenuOption>
@@ -31,18 +32,7 @@ export default class Chat extends React.Component {
 
     componentWillMount() {
         this.setState({
-            messages: [
-                {
-                    _id: 1,
-                    text: 'Hello developer',
-                    createdAt: new Date(),
-                    user: {
-                        _id: 2,
-                        name: 'React Native',
-                        avatar: 'https://placeimg.com/140/140/any',
-                    },
-                },
-            ],
+            messages: [],
         })
     }
 

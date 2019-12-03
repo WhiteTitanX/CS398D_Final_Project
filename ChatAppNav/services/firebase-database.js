@@ -93,7 +93,7 @@ exports.joinChatRoom = function(chatroomName){
   });
 };
 
-exports.LeaveChatRoom = function(chatroomID){
+exports.LeaveChatRoom = function(key){
   return new Promise((resolve, reject) => {
     global.firebase.database().ref(exports.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid,key))
       .remove()
