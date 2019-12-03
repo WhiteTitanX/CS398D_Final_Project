@@ -11,7 +11,7 @@ export default class Chat extends React.Component {
             headerRight: () => (
                 <Menu style={{paddingRight: 15,paddingLeft:10, paddingBottom:1}}>
                     <MenuTrigger>
-                        <Text style={{fontSize: 18, padding:2}}>☰</Text>
+                        <Text style={{fontSize: 20, padding:5, paddingLeft: 10, paddingRight: 10}}>☰</Text>
                     </MenuTrigger>
                     <MenuOptions>
                         <MenuOption onSelect={() => {

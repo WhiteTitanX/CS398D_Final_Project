@@ -56,7 +56,7 @@ function checkAuth(){
 		let unsubscribe = firebase.auth().onAuthStateChanged(user => {
 			if (user) {
 				//If logged in, navigate to chatroom list screen.
-				//console.log(user);
+				console.log(user);
 				unsubscribe();
 				resolve(true);
 			} else {
@@ -172,14 +172,13 @@ global.styles = StyleSheet.create({
 		marginTop: 30
 	},
 	contactContainer: {
-		height: 2*(deviceHeight/20),
+		height: Math.max(2*(deviceHeight/20), 80),
 		width: deviceWidth,
 		borderBottomWidth: 1,
 		borderBottomColor: '#d9d9d9',
 		paddingLeft: 15,
 		alignItems: 'center',
 		flexDirection: 'row',
-
 	},
 	contactName: {
 		fontSize: deviceWidth/20,
