@@ -56,7 +56,7 @@ function checkAuth(){
 		let unsubscribe = firebase.auth().onAuthStateChanged(user => {
 			if (user) {
 				//If logged in, navigate to chatroom list screen.
-				console.log(user);
+				//console.log(user);
 				unsubscribe();
 				resolve(true);
 			} else {

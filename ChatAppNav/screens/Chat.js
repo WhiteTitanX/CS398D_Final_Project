@@ -37,7 +37,7 @@ export default class Chat extends React.Component {
     }
 
     onSend(messages = []) {
-        console.log(messages);
+        //console.log(messages);
         //console.log(this.props.navigation.state.params);
         global.firebase.databaseHelper.sendMessages(messages,this.props.navigation.getParam('key'));
         /*
@@ -62,7 +62,7 @@ export default class Chat extends React.Component {
     }
 
     updateChatroomMessages(datasnapshot){
-        console.log(datasnapshot.val());
+        //console.log(datasnapshot.val());
         let messageList = [];
         for(let key in datasnapshot.val()){
             messageList.push(datasnapshot.val()[key]);

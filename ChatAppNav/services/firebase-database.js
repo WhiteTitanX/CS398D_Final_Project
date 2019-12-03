@@ -72,7 +72,7 @@ exports.joinChatRoom = function(chatroomName){
         //console.log(data.val());
         let chatrooms = data.val();
         for(let key in chatrooms){
-          console.log(chatrooms[key].name);
+          //console.log(chatrooms[key].name);
           if(chatrooms[key].name===chatroomName){
             let update = {};
             update[key] = chatrooms[key];

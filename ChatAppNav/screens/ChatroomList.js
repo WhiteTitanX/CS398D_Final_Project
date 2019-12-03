@@ -30,7 +30,7 @@ export default class ChatroomList extends React.Component {
                             <Text style={{padding: 5, fontSize: 16}}>Join Chatroom</Text>
                         </MenuOption>
                         <MenuOption onSelect={() => {
-                            global.firebase.auth.signOut().then(() => {
+                            global.firebase.auth().signOut().then(() => {
                                 props.navigation.navigate('AuthLoading');
                             })
                         }}>

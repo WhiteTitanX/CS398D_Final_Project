@@ -31,7 +31,7 @@ export default class CreateChatroomScreen extends React.Component {
                     <View style={styles.row}>
                         <TouchableHighlight
                             onPress={()=>{
-                                console.log("Creating chatroom: " + this.state.chatroomName);
+                                //console.log("Creating chatroom: " + this.state.chatroomName);
                                 if(this.state.icon===''){
                                     this.state.icon = 'https://cdn.raceroster.com/assets/images/team-placeholder.png';
                                 }
