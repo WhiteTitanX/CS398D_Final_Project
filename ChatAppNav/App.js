@@ -76,24 +76,6 @@ function updatePublicProfile(uid){
 	return global.firebase.database().ref(path).set(publicProfile);
 }
 
-function saveObjectSetObjectKey(obj,endpoint){
-	//Remove functions and undefined.
-	obj=JSON.parse(JSON.stringify(obj));
-	return new Promise((resolve) => {
-		obj.lastSaved = new Date().getTime();
-		if(obj.key){
-			this.update(endpoint,obj.key,obj);
-			resolve(obj.key);
-		}
-		else{
-			obj.key=this.push(endpoint,obj);
-			this.saveObjectSetObjectKey(obj,endpoint).then((data)=>{
-				resolve(data);
-			});
-		}
-	});
-}
-
 const LoggedOutStack = createStackNavigator(
 	{
 		Login: {
