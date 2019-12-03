@@ -7,3 +7,18 @@ chatroom message:
 }
 
 
+Chatroom:
+{
+    messages:[],
+    name:string, //primary key (must be unique)
+    icon:string,
+}
+
+User Private Profile:
+{
+    chatroomList:
+    {
+        -LVaslidhoh3qlenljasd:true
+    },
+    contacts:[]
+}

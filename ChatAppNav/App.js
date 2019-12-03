@@ -41,9 +41,9 @@ firebase.initializeApp(firebaseConfig);
 
 global.firebase = {
 	authHelper:FirebaseAuthHelper,
-	auth:firebase.auth(),
+	auth:firebase.auth,
 	authService:{},
-	database:firebase.database(),
+	database:firebase.database,
 	databaseHelper:FirebaseDatabaseHelper,
 	databaseService:{}
 };
@@ -67,12 +67,12 @@ function checkAuth(){
 }
 
 function updatePublicProfile(uid){
-	if(!uid && global.firebase.auth.currentUser){
-		uid = global.firebase.auth.currentUser.uid;
+	if(!uid && global.firebase.auth().currentUser){
+		uid = global.firebase.auth().currentUser.uid;
 	}
 	let path = global.firebase.databaseHelper.getPublicProfilePath(uid);
-	let publicProfile = global.firebase.authHelper.getPublicUserProfile(global.firebase.auth.currentUser);
-	return global.firebase.database.ref(path).set(publicProfile);
+	let publicProfile = global.firebase.authHelper.getPublicUserProfile(global.firebase.auth().currentUser);
+	return global.firebase.database().ref(path).set(publicProfile);
 }
 
 function saveObjectSetObjectKey(obj,endpoint){

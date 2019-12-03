@@ -8,7 +8,7 @@ export default class CreateChatroomScreen extends React.Component {
 
     state = {
         chatroomName: '',
-        users: '',
+        icon: '',
         usersArray: []
     };
 
@@ -25,15 +25,29 @@ export default class CreateChatroomScreen extends React.Component {
                                placeholder='Chatroom Name'
                     />
                     <TextInput style={styles.loginInput}
-                               onChangeText={(users) => this.setState({users})}
-                               placeholder='Name1, Name2, Name3...'
+                               onChangeText={(icon) => this.setState({icon})}
+                               placeholder='Icon URL'
                     />
                     <View style={styles.row}>
                         <TouchableHighlight
                             onPress={()=>{
-                                this.state.usersArray = this.state.users.split(',');
                                 console.log("Creating chatroom: " + this.state.chatroomName);
-                                console.log("These are the people in this chatroom: " + this.state.usersArray);
+                                if(this.state.icon===''){
+                                    this.state.icon = 'https://cdn.raceroster.com/assets/images/team-placeholder.png';
+                                }
+                                global.firebase.databaseHelper.createChatRoom(this.state.chatroomName,this.state.icon)
+                                  .then(()=>{
+                                    global.firebase.databaseHelper.joinChatRoom(this.state.chatroomName)
+                                      .then(()=>{
+                                        this.props.navigation.goBack();
+                                      })
+                                      .catch(error=>{
+                                        console.log(error);
+                                      });
+                                  })
+                                  .catch(error=>{
+                                    console.log(error);
+                                  });
                             }}
                         >
                             <View style={styles.button}><Text style={styles.buttonText}>Create</Text></View>

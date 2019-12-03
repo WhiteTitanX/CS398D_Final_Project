@@ -3,6 +3,8 @@ import {Text, TouchableHighlight, View, ScrollView, Image} from "react-native";
 import {Menu, MenuOptions, MenuOption, MenuTrigger} from "react-native-popup-menu";
 
 export default class ChatroomList extends React.Component {
+
+    chatroomRef;
     static navigationOptions = props => {
         return {
             title: 'Chatroom List',
@@ -32,7 +34,7 @@ export default class ChatroomList extends React.Component {
                                 props.navigation.navigate('AuthLoading');
                             })
                         }}>
-                            <Text style={{padding: 5, fontSize: 16}}>Sign out of {global.firebase.auth.currentUser.displayName}</Text>
+                            <Text style={{padding: 5, fontSize: 16}}>Sign out of {global.firebase.auth().currentUser.displayName}</Text>
                         </MenuOption>
                         <MenuOption onSelect={() => {global.firebase.authService.checkAuth();}}>
                             <Text style={{padding: 5, fontSize: 16}}>[DEV] Check User</Text>
@@ -44,24 +46,8 @@ export default class ChatroomList extends React.Component {
 
     state = {
         groups: [
-            {
-                groupName: 'CIS120 Chat',
-                groupImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Rr4Yntjn6QIhXmPESm1Grv2YodbvfuXyi_8JRHSnb6EQz1OZ6g&s',
-            },
-            {
-                groupName: 'Baseball Chat',
-                groupImage: 'https://www.baseballprospectus.com/wp-content/uploads/2019/04/baseball-on-dirt-1000x714.jpg',
-            },
-            {
-                groupName: 'Music Production Team Chat',
-                groupImage: 'https://pmcvariety.files.wordpress.com/2019/01/apple-music.jpg?w=1000&h=563&crop=1',
-            },
-            {
-                groupName: 'The Squad Chat',
-                groupImage: 'https://s3.amazonaws.com/s3.mp-cdn.net/56/e7/341a69a52dfdace8ffc671b0b743-is-the-wall-street-journal-stupid.jpg',
-            }
         ]
-    }
+    };
 
     render() {
         return (
@@ -70,17 +56,17 @@ export default class ChatroomList extends React.Component {
                     <View style={{}}>
                         {this.state.groups.map((gName) => (
                                 <TouchableHighlight
-                                    key={gName.groupName}
+                                    key={gName.name}
                                     onPress={() => {
                                         alert('Text the contact')
                                     }} >
                                     <View style={styles.contactContainer}>
                                         <Image
-                                            source = {{uri:gName.groupImage}}
+                                            source = {{uri:gName.icon}}
                                             style={{width: 64, height: 64}}
                                         />
                                         <Text style={styles.contactName}>
-                                            {gName.groupName}
+                                            {gName.name}
                                         </Text>
                                     </View>
                                 </TouchableHighlight>
@@ -90,5 +76,23 @@ export default class ChatroomList extends React.Component {
                 </ScrollView>
             </View>
         );
+    }
+
+    updateChatroomList(datasnapshot){
+      let chatroomList = [];
+      for(let key in datasnapshot.val()){
+        chatroomList.push(datasnapshot.val()[key])
+      }
+      this.state.groups = chatroomList;
+      this.forceUpdate();
+    }
+
+    componentDidMount() {
+      this.chatroomRef = global.firebase.database().ref(global.firebase.databaseHelper.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid));
+      this.chatroomRef.on('value', this.updateChatroomList, this);
+    }
+
+    componentWillUnmount() {
+      this.chatroomRef.off('value',this.updateChatroomList, this);
     }
 }

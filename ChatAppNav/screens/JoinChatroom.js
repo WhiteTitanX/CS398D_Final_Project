@@ -26,6 +26,13 @@ export default class JoinChatroomScreen extends React.Component {
                         <TouchableHighlight
                             onPress={()=>{
                                 console.log("Join chatroom: " + this.state.chatroomName);
+                                global.firebase.databaseHelper.joinChatRoom(this.state.chatroomName)
+                                  .then(()=>{
+                                      this.props.navigation.goBack();
+                                  })
+                                  .catch(error=>{
+                                      console.log(error);
+                                  });
                             }}
                         >
                             <View style={styles.button}><Text style={styles.buttonText}>Join</Text></View>

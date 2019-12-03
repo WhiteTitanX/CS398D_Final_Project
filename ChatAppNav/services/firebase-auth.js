@@ -2,7 +2,8 @@ exports.getPublicUserProfile = function (privateUserProfile){
   let publicProfile = {
     uid:privateUserProfile.uid,
     displayName:privateUserProfile.displayName,
-    photoURL:privateUserProfile.photoURL
+    photoURL:privateUserProfile.photoURL,
+    email:privateUserProfile.email
   };
   return publicProfile;
 };

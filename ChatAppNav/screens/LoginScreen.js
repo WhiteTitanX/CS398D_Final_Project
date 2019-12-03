@@ -30,12 +30,12 @@ export default class LoginScreen extends React.Component {
           />
           <View style={styles.row}>
             <TouchableHighlight
-              onPress={()=>{global.firebase.auth.signInWithEmailAndPassword(this.state.username,this.state.password)
+              onPress={()=>{global.firebase.auth().signInWithEmailAndPassword(this.state.username,this.state.password)
                 .then(user=>{
                   this.props.navigation.navigate('App');
                 })
                 .catch(error=>{
-                  if(error.code==='auth/invalid-email' || error.code==='auth/wrong-password'){
+                  if(error.code==='auth/invalid-email' || error.code==='auth/wrong-password' || error.code==='auth/user-not-found'){
                     alert('Incorrect Email/Password entered.')
                   }
                   else{
