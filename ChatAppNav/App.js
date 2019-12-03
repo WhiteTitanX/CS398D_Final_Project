@@ -21,6 +21,7 @@ import ChatroomList from "./screens/ChatroomList";
 import CreateChatroom from "./screens/CreateChatroom";
 import JoinChatroom from "./screens/JoinChatroom";
 import ContactList from "./screens/ContactList";
+import Chat from "./screens/Chat";
 
 let deviceH = Dimensions.get('screen').height;
 let windowH = Dimensions.get('window').height;
@@ -113,7 +114,8 @@ const LoggedInStack = createStackNavigator(
 		ChatroomListScreen: ChatroomList,
 		CreateChatroomScreen: CreateChatroom,
 		JoinChatroomScreen: JoinChatroom,
-		ContactListScreen: ContactList
+		ContactListScreen: ContactList,
+		ChatScreen: Chat
 	},
 	{
 		initialRouteName: 'ChatroomListScreen',
