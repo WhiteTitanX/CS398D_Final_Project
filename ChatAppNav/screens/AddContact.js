@@ -1,13 +1,13 @@
 import * as React from "react";
 import {Text, TouchableHighlight, View, TextInput, ImageBackground} from "react-native";
 
-export default class JoinChatroomScreen extends React.Component {
+export default class AddContact extends React.Component {
     static navigationOptions = {
-        title: 'Join Chatroom'
+        title: 'Add Contact'
     };
 
     state = {
-        chatroomName: ''
+        name: ''
     };
 
     render() {
@@ -17,16 +17,15 @@ export default class JoinChatroomScreen extends React.Component {
                     style={styles.imageBackground}
                     source={require('./../res/createchatroom_background.jpg')}
                 >
-                    <Text style={styles.title}>Join a Chatroom</Text>
+                    <Text style={styles.title}>Add a Contact</Text>
                     <TextInput style={styles.loginInput}
-                               onChangeText={(chatroomName) => this.setState({chatroomName})}
-                               placeholder='Chatroom Name'
+                               onChangeText={(name) => this.setState({name})}
+                               placeholder='Contact Name'
                     />
                     <View style={styles.row}>
                         <TouchableHighlight
                             onPress={()=>{
-                                //console.log("Join chatroom: " + this.state.chatroomName);
-                                global.firebase.databaseHelper.joinChatRoom(this.state.chatroomName)
+                                global.firebase.databaseHelper.addContact(this.state.name)
                                     .then(()=>{
                                         this.props.navigation.goBack();
                                     })
@@ -35,7 +34,7 @@ export default class JoinChatroomScreen extends React.Component {
                                     });
                             }}
                         >
-                            <View style={styles.button}><Text style={styles.buttonText}>Join</Text></View>
+                            <View style={styles.button}><Text style={styles.buttonText}>Add</Text></View>
                         </TouchableHighlight>
                     </View>
                 </ImageBackground>

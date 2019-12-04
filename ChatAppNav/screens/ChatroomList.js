@@ -58,6 +58,7 @@ export default class ChatroomList extends React.Component {
                                 <TouchableHighlight
                                     key={gName.name}
                                     onPress={() => {
+                                        console.log(gName);
                                         this.props.navigation.navigate('ChatScreen', gName);
                                     }} >
                                     <View style={styles.contactContainer}>
