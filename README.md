@@ -8,7 +8,7 @@
 ## Start Project Debug
 npm run web
 
-#Presentation
+Presentation
 
 https://docs.google.com/presentation/d/1NKG00dBPaM8kmOvGAavHLckGORNOyRKW6yFdChlJ8D8/edit?usp=sharing
 
