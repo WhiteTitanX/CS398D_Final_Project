@@ -166,7 +166,7 @@ exports.RemoveContact = function(key){
                reject(error);
            })
     });
-}
+};
 
 exports.LeaveChatRoom = function(key){
   return new Promise((resolve, reject) => {
@@ -198,9 +198,12 @@ exports.getContacts = function(){
   });
 };
 
-exports.getJoinedChatroomList = function(){
+exports.getJoinedChatroomList = function(uid){
+  if(!uid){
+    uid = global.firebase.auth().currentUser.uid;
+  }
   return new Promise((resolve, reject) => {
-    global.firebase.database().ref(exports.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid))
+    global.firebase.database().ref(exports.getPrivateProfileChatroomPath(uid))
       .once('value')
       .then(data=>{
         let chatroomList = [];

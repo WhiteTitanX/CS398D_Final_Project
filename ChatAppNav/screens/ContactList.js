@@ -57,21 +57,55 @@ export default class ContactList extends React.Component {
                                         let chatName = names.join(' & ');
                                         global.firebase.databaseHelper.getChatroom(chatName)
                                           .then((chatroom) => {
-                                              //console.log('Found chatroom',chatroom);
-                                              //navigate to such chat
-                                              this.props.navigation.navigate('ChatScreen',chatroom);
+                                              //Check if you are joined to the chat, if so, navigate, if not, join, then navigate.
+                                              global.firebase.databaseHelper.getJoinedChatroomList(global.firebase.auth().currentUser.uid)
+                                                .then(chatroomList=>{
+                                                    if(!chatroomList.find(chatroom=>chatroom.name===chatName)){
+                                                        global.firebase.databaseHelper.joinChatRoom(chatName)
+                                                          .then(() => {
+                                                              this.props.navigation.navigate('ChatScreen',chatroom);
+                                                          })
+                                                          .catch(error => {
+                                                              console.log(error);
+                                                          })
+                                                    }
+                                                    else{
+                                                        this.props.navigation.navigate('ChatScreen',chatroom);
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.log(error);
+                                                });
+                                              //Check if other person is joined, if not, join them.
+                                              global.firebase.databaseHelper.getJoinedChatroomList(gName.uid)
+                                                .then(chatroomList=>{
+                                                    if(!chatroomList.find(chatroom=>chatroom.name===chatName)){
+                                                        global.firebase.databaseHelper.joinChatRoom(chatName,gName.uid)
+                                                          .then(() => {
+                                                          })
+                                                          .catch(error => {
+                                                              console.log(error);
+                                                          })
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.log(error);
+                                                })
                                           })
                                           .catch(error => {
+                                              //Chatroom doesn't exist yet, so create it.
                                               if(error.status && error.status===404){
                                                   global.firebase.databaseHelper.createChatRoom(chatName,icon)
                                                     .then(() => {
+                                                        //Join newly created chatroom
                                                         global.firebase.databaseHelper.joinChatRoom(chatName)
                                                           .then(() => {
+                                                              //Have other user join chatroom
                                                               global.firebase.databaseHelper.joinChatRoom(chatName,gName.uid)
                                                                 .then(() => {
+                                                                    //get the chatroom object from database, so you can navigate to it
                                                                     global.firebase.databaseHelper.getChatroom(chatName)
                                                                       .then((chatroom) => {
-                                                                          console.log('Found chatroom',chatroom);
                                                                           //navigate to such chat
                                                                           this.props.navigation.navigate('ChatScreen',chatroom);
                                                                       })
