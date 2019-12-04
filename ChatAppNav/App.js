@@ -7,6 +7,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { StatusBar } from 'react-native';
 import {MenuProvider} from "react-native-popup-menu";
+import { ScreenOrientation } from 'expo';
 
 import * as firebase from 'firebase/app';
 import 'firebase/database';
@@ -119,6 +120,16 @@ const AppContainer = createAppContainer(
 );
 
 export default class App extends React.Component {
+	componentDidMount() {
+		ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
+			.then(() => {
+
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
+
 	render() {
 		return (
 			<MenuProvider>

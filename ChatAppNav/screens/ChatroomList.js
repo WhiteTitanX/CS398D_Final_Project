@@ -36,9 +36,6 @@ export default class ChatroomList extends React.Component {
                         }}>
                             <Text style={{padding: 5, fontSize: 16}}>Sign out of {global.firebase.auth().currentUser.displayName}</Text>
                         </MenuOption>
-                        <MenuOption onSelect={() => {global.firebase.authService.checkAuth();}}>
-                            <Text style={{padding: 5, fontSize: 16}}>[DEV] Check User</Text>
-                        </MenuOption>
                     </MenuOptions>
                 </Menu>
             ),}
@@ -58,7 +55,6 @@ export default class ChatroomList extends React.Component {
                                 <TouchableHighlight
                                     key={gName.name}
                                     onPress={() => {
-                                        console.log(gName);
                                         this.props.navigation.navigate('ChatScreen', gName);
                                     }} >
                                     <View style={styles.contactContainer}>
