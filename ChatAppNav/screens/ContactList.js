@@ -52,33 +52,49 @@ export default class ContactList extends React.Component {
                                 <MenuOptions>
                                     <MenuOption onSelect={() => {
                                         let icon = gName.photoURL;
-                                        let chatName = gName.displayName + ' & ' + global.firebase.auth().currentUser.displayName;
-                                        global.firebase.databaseHelper.createChatRoom(chatName,icon)
-                                            .then(() => {
-                                                global.firebase.databaseHelper.joinChatRoom(chatName)
+                                        let names = [gName.displayName,global.firebase.auth().currentUser.displayName];
+                                        names = names.sort();
+                                        let chatName = names.join(' & ');
+                                        global.firebase.databaseHelper.getChatroom(chatName)
+                                          .then((chatroom) => {
+                                              //console.log('Found chatroom',chatroom);
+                                              //navigate to such chat
+                                              this.props.navigation.navigate('ChatScreen',chatroom);
+                                          })
+                                          .catch(error => {
+                                              if(error.status && error.status===404){
+                                                  global.firebase.databaseHelper.createChatRoom(chatName,icon)
                                                     .then(() => {
-                                                        global.firebase.databaseHelper.joinChatRoom(gName.uid, chatName)
-                                                            .then(() => {
-                                                                global.firebase.databaseHelper.getChatroom(chatName)
-                                                                    .then(() => {
-                                                                        //navigate to such chat
-                                                                    })
-                                                                    .catch(error => {
-                                                                        console.log(error);
-                                                                    })
-                                                                //this.props.navigation.navigate('ChatScreen', );
-                                                            })
-                                                            .catch(error => {
-                                                                console.log(error);
-                                                            })
+                                                        global.firebase.databaseHelper.joinChatRoom(chatName)
+                                                          .then(() => {
+                                                              global.firebase.databaseHelper.joinChatRoom(chatName,gName.uid)
+                                                                .then(() => {
+                                                                    global.firebase.databaseHelper.getChatroom(chatName)
+                                                                      .then((chatroom) => {
+                                                                          console.log('Found chatroom',chatroom);
+                                                                          //navigate to such chat
+                                                                          this.props.navigation.navigate('ChatScreen',chatroom);
+                                                                      })
+                                                                      .catch(error => {
+                                                                          console.log(error);
+                                                                      })
+                                                                })
+                                                                .catch(error => {
+                                                                    console.log(error);
+                                                                })
+                                                          })
+                                                          .catch(error => {
+                                                              console.log(error);
+                                                          })
                                                     })
                                                     .catch(error => {
                                                         console.log(error);
                                                     })
-                                            })
-                                            .catch(error => {
-                                                console.log(error);
-                                            })
+                                              }
+                                              else{
+                                                  console.log(error);
+                                              }
+                                          });
                                     }}>
                                         <Text style={{padding: 5, fontSize: 16}}>Start Direct Message</Text>
                                     </MenuOption>

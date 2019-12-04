@@ -74,19 +74,17 @@ exports.createChatRoom = function (name,icon){
 
 exports.getChatroom = function(name){
     return new Promise(((resolve, reject) => {
-        global.firebase.database().ref(exports.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid))
+        global.firebase.database().ref(exports.getChatroomPath())
             .orderByChild('name')
             .equalTo(name)
             .once('value')
             .then(data => {
-                let chatrooms = data.val();
-                console.log(data);
-                for(let key in chatrooms){
-                    if(chatrooms[key].name === name){
-                        console.log(chatrooms[key]);
-                        resolve(chatrooms[key]);
-                    }
+              for(let key in data.val()){
+                if(data.val()[key].name===name){
+                  resolve(data.val()[key]);
                 }
+              }
+              reject({status:404,message:'Chatroom Not Found'});
             })
             .catch(error => {
                 reject(error);
@@ -94,16 +92,16 @@ exports.getChatroom = function(name){
     }));
 };
 
-exports.addContact = function(name){
+exports.addContact = function(email){
   return new Promise(((resolve, reject) => {
     global.firebase.database().ref(exports.getPublicProfilePath())
-        .orderByChild('displayName')
-        .equalTo(name)
+        .orderByChild('email')
+        .equalTo(email)
         .once('value')
         .then(data => {
           let users = data.val();
           for(let key in users){
-            if(users[key].displayName===name){
+            if(users[key].email===email){
               let update = {};
               update[key] = users[key];
               global.firebase.database().ref(exports.getPrivateProfileContactsPath(global.firebase.auth().currentUser.uid)).update(update)
@@ -122,39 +120,10 @@ exports.addContact = function(name){
   }));
 };
 
-exports.joinChatRoom = function(userUID, chatroomName){
-    return new Promise((resolve, reject) => {
-        global.firebase.database().ref(exports.getChatroomPath())
-            //.once('value')
-            .orderByChild('name')
-            .equalTo(chatroomName)
-            .once('value')
-            .then(data => {
-                //console.log(data.val());
-                let chatrooms = data.val();
-                for(let key in chatrooms){
-                    //console.log(chatrooms[key].name);
-                    if(chatrooms[key].name===chatroomName){
-                        let update = {};
-                        update[key] = chatrooms[key];
-                        global.firebase.database().ref(exports.getPrivateProfileChatroomPath(userUID)).update(update)
-                            .then(()=>{
-                                resolve();
-                            })
-                            .catch(error=>{
-                                reject(error);
-                            });
-                    }
-                }
-                //reject('No Chatroom with that name');
-            })
-            .catch(error=>{
-                reject(error);
-            });
-    });
-};
-
-exports.joinChatRoom = function(chatroomName){
+exports.joinChatRoom = function(chatroomName, uid){
+  if(!uid){
+    uid=global.firebase.auth().currentUser.uid;
+  }
   return new Promise((resolve, reject) => {
     global.firebase.database().ref(exports.getChatroomPath())
     //.once('value')
@@ -169,7 +138,7 @@ exports.joinChatRoom = function(chatroomName){
           if(chatrooms[key].name===chatroomName){
             let update = {};
             update[key] = chatrooms[key];
-            global.firebase.database().ref(exports.getPrivateProfileChatroomPath(global.firebase.auth().currentUser.uid)).update(update)
+            global.firebase.database().ref(exports.getPrivateProfileChatroomPath(uid)).update(update)
               .then(()=>{
                 resolve();
               })

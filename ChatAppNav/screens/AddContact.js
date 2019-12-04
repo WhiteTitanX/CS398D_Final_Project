@@ -7,7 +7,7 @@ export default class AddContact extends React.Component {
     };
 
     state = {
-        name: ''
+        email: ''
     };
 
     render() {
@@ -19,13 +19,13 @@ export default class AddContact extends React.Component {
                 >
                     <Text style={styles.title}>Add a Contact</Text>
                     <TextInput style={styles.loginInput}
-                               onChangeText={(name) => this.setState({name})}
-                               placeholder='Contact Name'
+                               onChangeText={(email) => this.setState({email})}
+                               placeholder='Contact Email'
                     />
                     <View style={styles.row}>
                         <TouchableHighlight
                             onPress={()=>{
-                                global.firebase.databaseHelper.addContact(this.state.name)
+                                global.firebase.databaseHelper.addContact(this.state.email.toLowerCase())
                                     .then(()=>{
                                         this.props.navigation.goBack();
                                     })

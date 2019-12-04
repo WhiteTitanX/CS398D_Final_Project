@@ -39,7 +39,7 @@ export default class SignupScreen extends React.Component {
           />
           <View style={styles.row}>
             <TouchableHighlight
-              onPress={()=>{global.firebase.auth().createUserWithEmailAndPassword(this.state.username,this.state.password)
+              onPress={()=>{global.firebase.auth().createUserWithEmailAndPassword(this.state.username.toLowerCase(),this.state.password)
                 .then((res)=>{
                   //console.log(res);
                   //After creating the user, update that user profile with the display name provided in Sign Up
