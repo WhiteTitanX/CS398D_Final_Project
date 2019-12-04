@@ -11,6 +11,7 @@ import { ScreenOrientation } from 'expo';
 
 import * as firebase from 'firebase/app';
 import 'firebase/database';
+import 'firebase/storage';
 import 'firebase/auth';
 
 import * as FirebaseDatabaseHelper from './services/firebase-database';
@@ -47,6 +48,7 @@ global.firebase = {
 	auth:firebase.auth,
 	authService:{},
 	database:firebase.database,
+	storage:firebase.storage,
 	databaseHelper:FirebaseDatabaseHelper,
 	databaseService:{}
 };
