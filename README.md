@@ -5,7 +5,7 @@ This allowed multiple screens to be developed at once in parallel.
 Once we attempted to link to firebase, and a consistent theming, 
 the tabs turned out to be a bad design.
 
-We took what we learned and developed he Nav version, 
+We took what we learned and developed the Nav version, 
 that used React Native's navigation package. 
 This allowed us to make multiple page paths for both logged in, and logged out.
 
